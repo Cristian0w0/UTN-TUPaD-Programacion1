@@ -5,7 +5,8 @@ numérico
 
 def main():
     patente_inicial = input("Ingresar patente: ").upper()
-    aumento = int(input("Ingresar aumento de patente: "))
+    aumento = int(input("Ingresar aumento de patente " \
+    "(max 17575999): "))
     if validar_datos(patente_inicial, aumento):
         valor_inicial = calcular_valor_inicial(patente_inicial)
         valor_final = valor_inicial + aumento
@@ -13,7 +14,7 @@ def main():
             patente_final = calcular_patente_final(valor_final)
             print(f"Patente final: {patente_final}")
         else:
-            print("Patente final inválida")
+            print("Patente final inválida, demasiado aumento")
 
 #Validar datos
 def validar_datos(patente_inicial:str, aumento:int):
@@ -21,13 +22,16 @@ def validar_datos(patente_inicial:str, aumento:int):
         for i in range(0,6):
             if (0 <= i <= 2 and not patente_inicial[i].isalpha() 
             or (3 <= i <= 5) and not patente_inicial[i].isnumeric()):
-                print("Patente no válida")
+                print("Patente inválida")
                 return False
     else:
-        print("Patente no válida")
+        print("Patente inválida")
         return False
     if (0 <= aumento <= 17575999):
         return True
+    else:
+        print("Aumento inválido")
+        return False
 
 #Calcular valor inicial de patente
 def calcular_valor_inicial(patente_inicial:str):
