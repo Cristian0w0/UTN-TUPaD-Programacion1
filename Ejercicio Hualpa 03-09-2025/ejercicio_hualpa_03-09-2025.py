@@ -6,11 +6,10 @@ numérico
 def main():
     patente_inicial = input("Ingresar patente: ").upper()
     aumento = int(input("Ingresar aumento de patente: "))
-    validar_datos(patente_inicial, aumento)
-    if validar_datos:
+    if validar_datos(patente_inicial, aumento):
         valor_inicial = calcular_valor_inicial(patente_inicial)
         valor_final = valor_inicial + aumento
-        if (0 <= valor_final <= 2775999):
+        if (0 <= valor_final <= 17575999):
             patente_final = calcular_patente_final(valor_final)
             print(f"Patente final: {patente_final}")
         else:
@@ -27,7 +26,7 @@ def validar_datos(patente_inicial:str, aumento:int):
     else:
         print("Patente no válida")
         return False
-    if (0 <= aumento <= 2775999):
+    if (0 <= aumento <= 17575999):
         return True
 
 #Calcular valor inicial de patente
@@ -35,13 +34,12 @@ def calcular_valor_inicial(patente_inicial:str):
     valor_inicial = 0
     letras = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N",
             "O","P","Q","R","S","T","U","V","W","X","Y","Z"]
-    for i in range(0,6,1):
-        j = 5-i
-        if (0 <= i <= 2):
-            valor_inicial += letras.index(patente_inicial[i]) * \
-            (10 ** (j))
-        elif (3 <= i <= 5):
-            valor_inicial += int(patente_inicial[i]) * (10 ** (j))
+    valor_inicial += letras.index(patente_inicial[0]) * 676000
+    valor_inicial += letras.index(patente_inicial[1]) * 26000
+    valor_inicial += letras.index(patente_inicial[2]) * 1000
+    valor_inicial += int(patente_inicial[3]) * 100
+    valor_inicial += int(patente_inicial[4]) * 10
+    valor_inicial += int(patente_inicial[5])
     return valor_inicial
 
 
@@ -51,24 +49,17 @@ def calcular_patente_final(valor_final:int):
     valor_letra1 = 0
     valor_letra2 = 0
     valor_letra3 = 0
-    while True:
-        if valor_final >= 100000 and valor_letra1 == 0:
-            valor_letra1 = valor_final // 100000
-            if (valor_letra1 > 25):
-                valor_letra1 -= valor_letra1 - 25
-            valor_final -= valor_letra1 * 100000
-        elif valor_final >= 10000 and valor_letra2 == 0:
-            valor_letra2 = valor_final // 10000
-            if (valor_letra2 > 25):
-                valor_letra2 -= valor_letra2 - 25
-            valor_final -= valor_letra2 * 10000
-        elif valor_final >= 1000 and valor_letra3 == 0:
-            valor_letra3 = valor_final // 1000
-            if (valor_letra3 > 25):
-                valor_letra3 -= valor_letra3 - 25
-            valor_final -= valor_letra3 * 1000
-        else:
-            break
+
+    if (valor_final >= 676000):
+        valor_letra1 = valor_final // 676000
+        valor_final -= valor_letra1 * 676000
+    if (valor_final >= 26000):
+        valor_letra2 = valor_final // 26000
+        valor_final -= valor_letra2 * 26000
+    if (valor_final >= 1000):
+        valor_letra3 = valor_final // 1000
+        valor_final -= valor_letra3 * 1000
+
     letras = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N",
             "O","P","Q","R","S","T","U","V","W","X","Y","Z"]
     patente_final += letras[valor_letra1]
