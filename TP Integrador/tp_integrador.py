@@ -4,9 +4,6 @@ CONTINENTES = ["África", "Asia", "Europa", "América", "Oceanía"]
 
 import csv
 import sys
-#import os
-#os.chdir(r"D:\formateo win 11\utn tec. programación\Programación 1\Repositorio\TP Integrador")
-#print(os.getcwd())
 
 def main():
     while True:
