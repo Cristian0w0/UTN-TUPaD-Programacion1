@@ -1,0 +1,5 @@
+﻿Nombre,Precio,Cantidad
+Lapicera,120.5,30
+Lapiz,80.75,55
+Pluma,230.0,10
+Crayón,50.0,75
